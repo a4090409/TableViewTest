@@ -14,7 +14,7 @@ class RestaurantTableViewController: UITableViewController {
     
     var restaurantImages = ["cafedeadend.jpg", "homei.jpg", "teakha.jpg", "cafeloisl.jpg", "petiteoyster.jpg", "forkeerestaurant.jpg", "posatelier.jpg", "bourkestreetbakery.jpg", "haighschocolate.jpg", "palominoespresso.jpg", "upstate.jpg", "traif.jpg", "grahamavenuemeats.jpg", "wafflewolf.jpg", "fiveleaves.jpg", "cafelore.jpg", "confessional.jpg", "barrafina.jpg", "donostia.jpg", "royaloak.jpg", "thaicafe.jpg"]
     
-    var restaurantLocations = ["Hong Kong", "Hong Kong", "Hong Kong", "Hong Kong", "Hong Kong", "Hong Kong", "Hong Kong", "Sydney", "Sydney", "Sydney", "New York", "New York", "New York", "New York", "New York", "New York", "New York", "London", "London", "London", "London"]
+    var restaurantLocations = ["Hong Kong334567890-2321495228322838232", "Hong Kong334567890-2321495228322838232", "Hong Kong334567890-2321495228322838232", "Hong Kong334567890-2321495228322838232", "Hong Kong334567890-2321495228322838232", "Hong Kong334567890-2321495228322838232", "Hong Kong334567890-2321495228322838232", "Sydney3213284824821421323-232323233", "Sydney3213284824821421323-232323233", "Sydney3213284824821421323-232323233", "New Yorkdney3213284824821421323-232323233", "New Yorkdney3213284824821421323-232323233", "New York", "New Yorkdney3213284824821421323-232323233", "New York", "New York", "New Yorkdney3213284824821421323-232323233", "Londondney3213284824821421323-232323233", "Londondney3213284824821421323-232323233", "Londondney3213284824821421323-232323233", "Londondney3213284824821421323-232323233"]
     
     var restaurantTypes = ["Coffee & Tea Shop", "Cafe", "Tea House", "Austrian / Causual Drink", "French", "Bakery", "Bakery", "Chocolate", "Cafe", "American / Seafood", "American", "American", "Breakfast & Brunch", "Coffee & Tea", "Coffee & Tea", "Latin American", "Spanish", "Spanish", "Spanish", "British", "Thai"]
     
@@ -23,6 +23,8 @@ class RestaurantTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -57,8 +59,27 @@ class RestaurantTableViewController: UITableViewController {
         
         return cell
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowRestaurantDetail"
+        {
+            if let indexpath = tableView.indexPathForSelectedRow
+            {
+                let destinationController = segue.destination as! RestaurantDetailViewController
+                
+                destinationController.restaurantImage = restaurantImages[indexpath.row]
+                destinationController.restaurantLocationSource = restaurantLocations[indexpath.row]
+                destinationController.restautantNameSourec = restaurantNames[indexpath.row]
+            }
+        }
+    }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = true
+    }
+    /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionMenue = UIAlertController(title: "", message: "what do you want", preferredStyle: .actionSheet)
         
         let cancelbutton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -92,7 +113,7 @@ class RestaurantTableViewController: UITableViewController {
         
         optionMenue.addAction(checkItem)
         self.present(optionMenue, animated: true, completion: nil)
-    }
+    }*/
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
